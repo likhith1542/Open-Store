@@ -1,316 +1,332 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App Store</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Open Store</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
-            line-height: 1.6;
-        }
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Oxygen, Ubuntu, Cantarell, sans-serif;
+                background: #fafafa;
+                color: #1a1a1a;
+                line-height: 1.6;
+            }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+            .container {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
 
-        header {
-            margin-bottom: 50px;
-        }
+            header {
+                margin-bottom: 50px;
+            }
 
-        h1 {
-            font-size: 2.5em;
-            font-weight: 300;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-        }
+            h1 {
+                font-size: 2.5em;
+                font-weight: 300;
+                letter-spacing: -0.5px;
+                margin-bottom: 8px;
+            }
 
-        .tagline {
-            font-size: 1em;
-            color: #666;
-            font-weight: 400;
-        }
+            .tagline {
+                font-size: 1em;
+                color: #666;
+                font-weight: 400;
+            }
 
-        .search-bar {
-            margin-bottom: 40px;
-        }
+            .search-bar {
+                margin-bottom: 40px;
+            }
 
-        .search-input {
-            width: 100%;
-            padding: 14px 0;
-            border: none;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 16px;
-            background: transparent;
-            transition: border-color 0.2s;
-        }
+            .search-input {
+                width: 100%;
+                padding: 14px 0;
+                border: none;
+                border-bottom: 1px solid #e0e0e0;
+                font-size: 16px;
+                background: transparent;
+                transition: border-color 0.2s;
+            }
 
-        .search-input:focus {
-            outline: none;
-            border-bottom-color: #1a1a1a;
-        }
+            .search-input:focus {
+                outline: none;
+                border-bottom-color: #1a1a1a;
+            }
 
-        .search-input::placeholder {
-            color: #999;
-        }
+            .search-input::placeholder {
+                color: #999;
+            }
 
-        .filter-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
+            .filter-buttons {
+                display: flex;
+                gap: 12px;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
 
-        .filter-btn {
-            padding: 6px 16px;
-            border: 1px solid #e0e0e0;
-            background: transparent;
-            color: #666;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-            border-radius: 2px;
-        }
+            .filter-btn {
+                padding: 6px 16px;
+                border: 1px solid #e0e0e0;
+                background: transparent;
+                color: #666;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s;
+                border-radius: 2px;
+            }
 
-        .filter-btn:hover {
-            border-color: #1a1a1a;
-            color: #1a1a1a;
-        }
+            .filter-btn:hover {
+                border-color: #1a1a1a;
+                color: #1a1a1a;
+            }
 
-        .filter-btn.active {
-            background: #1a1a1a;
-            color: white;
-            border-color: #1a1a1a;
-        }
+            .filter-btn.active {
+                background: #1a1a1a;
+                color: white;
+                border-color: #1a1a1a;
+            }
 
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1px;
-            background: #e0e0e0;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 60px;
-        }
+            .apps-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1px;
+                background: #e0e0e0;
+                border: 1px solid #e0e0e0;
+                margin-bottom: 60px;
+            }
 
-        .app-card {
-            background: white;
-            padding: 30px;
-            transition: background 0.2s;
-        }
+            .app-card {
+                background: white;
+                padding: 30px;
+                transition: background 0.2s;
+            }
 
-        .app-card:hover {
-            background: #fafafa;
-        }
+            .app-card:hover {
+                background: #fafafa;
+            }
 
-        .app-header {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
+            .app-header {
+                display: flex;
+                gap: 16px;
+                margin-bottom: 20px;
+            }
 
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
+            .app-icon {
+                width: 60px;
+                height: 60px;
+                background: #1a1a1a;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28px;
+                flex-shrink: 0;
+            }
 
-        .app-info {
-            flex: 1;
-            min-width: 0;
-        }
+            .app-info {
+                flex: 1;
+                min-width: 0;
+            }
 
-        .app-name {
-            font-size: 1.2em;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
+            .app-name {
+                font-size: 1.2em;
+                font-weight: 500;
+                color: #1a1a1a;
+                margin-bottom: 4px;
+            }
 
-        .app-developer {
-            color: #999;
-            font-size: 0.85em;
-            margin-bottom: 6px;
-        }
+            .app-developer {
+                color: #999;
+                font-size: 0.85em;
+                margin-bottom: 6px;
+            }
 
-        .app-category {
-            display: inline-block;
-            color: #666;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+            .app-category {
+                display: inline-block;
+                color: #666;
+                font-size: 0.75em;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
 
-        .app-description {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
+            .app-description {
+                color: #666;
+                line-height: 1.6;
+                margin-bottom: 20px;
+                font-size: 0.9em;
+            }
 
-        .app-stats {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-            font-size: 0.85em;
-            color: #999;
-        }
+            .app-stats {
+                display: flex;
+                gap: 16px;
+                margin-bottom: 20px;
+                font-size: 0.85em;
+                color: #999;
+            }
 
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+            .stat {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
 
-        .app-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
-        }
+            .app-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-top: 20px;
+                border-top: 1px solid #f0f0f0;
+            }
 
-        .app-version {
-            color: #999;
-            font-size: 0.85em;
-        }
+            .app-version {
+                color: #999;
+                font-size: 0.85em;
+            }
 
-        .download-btn {
-            background: #1a1a1a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+            .download-btn {
+                background: #1a1a1a;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 13px;
+                cursor: pointer;
+                transition: background 0.2s;
+                text-decoration: none;
+                display: inline-block;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
 
-        .download-btn:hover {
-            background: #333;
-        }
+            .download-btn:hover {
+                background: #333;
+            }
 
-        .download-btn:active {
-            background: #000;
-        }
+            .download-btn:active {
+                background: #000;
+            }
 
-        .empty-state {
-            text-align: center;
-            padding: 100px 20px;
-            color: #999;
-        }
+            .empty-state {
+                text-align: center;
+                padding: 100px 20px;
+                color: #999;
+            }
 
-        .empty-state h2 {
-            font-size: 1.5em;
-            font-weight: 300;
-            margin-bottom: 10px;
-            color: #666;
-        }
+            .empty-state h2 {
+                font-size: 1.5em;
+                font-weight: 300;
+                margin-bottom: 10px;
+                color: #666;
+            }
 
-        footer {
-            text-align: center;
-            color: #999;
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-top: 1px solid #e0e0e0;
-            font-size: 0.9em;
-        }
+            footer {
+                text-align: center;
+                color: #999;
+                padding: 40px 20px;
+                margin-top: 60px;
+                border-top: 1px solid #e0e0e0;
+                font-size: 0.9em;
+            }
 
-        footer a {
-            color: #666;
-            text-decoration: none;
-            border-bottom: 1px solid #e0e0e0;
-        }
+            footer a {
+                color: #666;
+                text-decoration: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
 
-        footer a:hover {
-            border-bottom-color: #1a1a1a;
-            color: #1a1a1a;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>App Store</h1>
-            <p class="tagline">Download applications</p>
-        </header>
+            footer a:hover {
+                border-bottom-color: #1a1a1a;
+                color: #1a1a1a;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Open Store</h1>
+                <p class="tagline">Download applications</p>
+            </header>
 
-        <div class="search-bar">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search apps...">
-            <div class="filter-buttons" id="filterButtons"></div>
+            <div class="search-bar">
+                <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="Search apps..."
+                />
+                <div class="filter-buttons" id="filterButtons"></div>
+            </div>
+
+            <div id="appsContainer">
+                <div class="apps-grid" id="appsGrid"></div>
+            </div>
+
+            <footer>
+                <p><a href="https://github.com" target="_blank">GitHub</a></p>
+            </footer>
         </div>
 
-        <div id="appsContainer">
-            <div class="apps-grid" id="appsGrid"></div>
-        </div>
+        <script>
+            // Open Store Catalog - Inline to avoid loading issues
+            const apps = [
+                {
+                    name: "Time Since",
+                    developer: "Likhith Garapati",
+                    category: "Productivity",
+                    description:
+                        "Track your habits and time since last events with ease. Perfect for building good habits and breaking bad ones.",
+                    version: "1.0.0+1",
+                    size: "2.5 MB",
+                    icon: "⌛",
+                    downloadUrl: "downloads/time-since.apk",
+                },
+            ];
 
-        <footer>
-            <p><a href="https://github.com" target="_blank">GitHub</a></p>
-        </footer>
-    </div>
+            let currentFilter = "All";
 
-    <script>
-        // App Store Catalog - Inline to avoid loading issues
-        const apps = [
-            {
-                name: "Time Since",
-        developer: "Likhith Garapati",
-        category: "Productivity",
-        description:
-            "Track your habits and time since last events with ease. Perfect for building good habits and breaking bad ones.",
-        version: "1.0.0+1",
-        size: "2.5 MB",
-        icon: "⌛",
-        downloadUrl: "downloads/time-since.apk",
-            }
-        ];
+            function renderApps(filterCategory = "All", searchTerm = "") {
+                const grid = document.getElementById("appsGrid");
 
-        let currentFilter = 'All';
+                let filteredApps = apps;
 
-        function renderApps(filterCategory = 'All', searchTerm = '') {
-            const grid = document.getElementById('appsGrid');
-            
-            let filteredApps = apps;
-            
-            if (filterCategory !== 'All') {
-                filteredApps = apps.filter(app => app.category === filterCategory);
-            }
-            
-            if (searchTerm) {
-                filteredApps = filteredApps.filter(app => 
-                    app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    app.description.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-            }
+                if (filterCategory !== "All") {
+                    filteredApps = apps.filter(
+                        (app) => app.category === filterCategory,
+                    );
+                }
 
-            if (filteredApps.length === 0) {
-                document.getElementById('appsContainer').innerHTML = `
+                if (searchTerm) {
+                    filteredApps = filteredApps.filter(
+                        (app) =>
+                            app.name
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()) ||
+                            app.description
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()),
+                    );
+                }
+
+                if (filteredApps.length === 0) {
+                    document.getElementById("appsContainer").innerHTML = `
                     <div class="empty-state">
                         <h2>No apps found</h2>
                         <p>Try a different search</p>
                     </div>
                 `;
-                return;
-            }
+                    return;
+                }
 
-            grid.innerHTML = filteredApps.map(app => `
+                grid.innerHTML = filteredApps
+                    .map(
+                        (app) => `
                 <div class="app-card">
                     <div class="app-header">
                         <div class="app-icon">${app.icon}</div>
@@ -329,38 +345,49 @@
                         <a href="${app.downloadUrl}" class="download-btn" download>Get</a>
                     </div>
                 </div>
-            `).join('');
-        }
+            `,
+                    )
+                    .join("");
+            }
 
-        function renderFilters() {
-            const categories = ['All', ...new Set(apps.map(app => app.category))];
-            const filterButtons = document.getElementById('filterButtons');
-            
-            filterButtons.innerHTML = categories.map(category => `
-                <button class="filter-btn ${category === 'All' ? 'active' : ''}" 
+            function renderFilters() {
+                const categories = [
+                    "All",
+                    ...new Set(apps.map((app) => app.category)),
+                ];
+                const filterButtons = document.getElementById("filterButtons");
+
+                filterButtons.innerHTML = categories
+                    .map(
+                        (category) => `
+                <button class="filter-btn ${category === "All" ? "active" : ""}" 
                         onclick="filterApps('${category}')">${category}</button>
-            `).join('');
-        }
+            `,
+                    )
+                    .join("");
+            }
 
-        function filterApps(category) {
-            currentFilter = category;
-            const searchTerm = document.getElementById('searchInput').value;
-            renderApps(category, searchTerm);
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent === category) {
-                    btn.classList.add('active');
-                }
-            });
-        }
+            function filterApps(category) {
+                currentFilter = category;
+                const searchTerm = document.getElementById("searchInput").value;
+                renderApps(category, searchTerm);
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            renderApps(currentFilter, e.target.value);
-        });
+                document.querySelectorAll(".filter-btn").forEach((btn) => {
+                    btn.classList.remove("active");
+                    if (btn.textContent === category) {
+                        btn.classList.add("active");
+                    }
+                });
+            }
 
-        renderFilters();
-        renderApps();
-    </script>
-</body>
+            document
+                .getElementById("searchInput")
+                .addEventListener("input", (e) => {
+                    renderApps(currentFilter, e.target.value);
+                });
+
+            renderFilters();
+            renderApps();
+        </script>
+    </body>
 </html>

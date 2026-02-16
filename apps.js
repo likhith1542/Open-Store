@@ -1,4 +1,4 @@
-// App Store Catalog
+// Open Store Catalog
 // Add your apps to this array
 
 const apps = [
